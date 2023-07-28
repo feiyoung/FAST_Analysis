@@ -1,5 +1,5 @@
 
-# ProFAST: a fast and efficient spatially aware factor analysis for multi-section spatial transcriptomics data
+# FAST: a fast and efficient spatially aware factor analysis for multi-section spatial transcriptomics data
 
 ## Simulation 
 The simulated dataset examples were in ./Simulation/simulated_datasets folder.

@@ -42,6 +42,7 @@ for(m in 1: length(seulist)){
 
 
 # Spatial dimension reduction using ProFAST -------------------------------
+## The previous name of FAST is called ProFAST
 library(ProFAST)
 
 XList_sp <- lapply(seulist, function(x) Matrix::t(x[["RNA"]]@data)) 

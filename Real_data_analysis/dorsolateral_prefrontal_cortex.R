@@ -95,7 +95,7 @@ save(posList, file='posList_DLPFC12.rds')
 
 
 # Spatial dimension reduction using ProFAST -------------------------------
-
+## The previous name of FAST is called ProFAST
 
 library(Seurat)
 seulist_hvg <- lapply(seulist_hvg, NormalizeData)

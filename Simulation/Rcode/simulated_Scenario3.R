@@ -1,12 +1,12 @@
 ######### We simulated three sections  based on a single section of the human DLPFC Visium dataset (sample ID: 151672) with eight spatial domains
 ### Scenario 3 (batch effect=high, biological effect= high)
-# setwd("E:/Research paper/IntTemporalSpatial/AnalysisCode/ProFAST_Analysis/")
+# setwd("E:/Research paper/IntTemporalSpatial/AnalysisCode/FAST_Analysis/")
 
 rm(list=ls())
 source("./Real_data_results/Rcode/util_funcs.R")
 load("./Simulation/simulated_datasets/batch_facScale0.6_de_prop0.3_seulist.rds")
 
-library(ProFAST)
+library(FAST)
 library(Seurat)
 
 yList <- lapply(seulist, function(x) as.character(x$Group))
@@ -27,12 +27,12 @@ XList_sp <- lapply(seulist, function(x) Matrix::t(x[["RNA"]]@data))
 nvec <- sapply(seulist, ncol)
 
 
-library(ProFAST)
+library(FAST)
 hq <- 15
 
 ## SpaFactor-G
 tic <- proc.time()
-reslist_fac_all <- ProFAST_run(XList_sp, AdjList, q=hq)
+reslist_fac_all <- FAST_run(XList_sp, AdjList, q=hq)
 toc <- proc.time()
 time_SpaMFactor <- toc[3] - tic[3]
 (R2_fac_all <- evaluate_DR_PF2(reslist_fac_all$hV, yList))
@@ -41,7 +41,7 @@ time_SpaMFactor <- toc[3] - tic[3]
 XList_count_sp <- lapply(seulist, function(x) Matrix::t(x[["RNA"]]@counts))
 ## SpaFactor-P
 tic <- proc.time()
-reslist_fac_pois <- ProFAST_run(XList_count_sp, AdjList, q=hq, fit.model = 'poisson')
+reslist_fac_pois <- FAST_run(XList_count_sp, AdjList, q=hq, fit.model = 'poisson')
 toc <- proc.time()
 time_SpaMFactor_pois <- toc[3] - tic[3]
 (R2_fac_pois <- evaluate_DR_PF2(reslist_fac_pois$hV, yList))

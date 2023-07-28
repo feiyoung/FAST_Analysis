@@ -73,6 +73,7 @@ save(posList1, file = 'HCC4_posList1.rds')
 
 
 # Spatial dimension reduction using ProFAST -------------------------------
+#### The previous name of FAST is called ProFAST
 library(ProFAST)
 library(Seurat)
 seulist_hvg <- lapply(seulist_hvg, NormalizeData)
