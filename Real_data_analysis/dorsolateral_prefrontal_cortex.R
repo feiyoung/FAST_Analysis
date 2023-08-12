@@ -4,7 +4,9 @@ source("./util_funcs.R")
 name_ID12 <- as.character(c(151507, 151508, 151509, 151510, 151669, 151670,
                             151671, 151672, 151673, 151674, 151675, 151676))
 n_sample <- length(name_ID12)
-dir_file <- "./braindata/"
+# dir_file <- "./braindata/"
+url_brainA <- "https://github.com/feiyoung/DR-SC.Analysis/raw/main/data/DLPFC_data/"; url_brainB <- ".rds"
+
 library(DR.SC)
 library(Seurat)
 library(SingleCellExperiment)
@@ -15,7 +17,7 @@ for(r in 1: n_sample){
   # r <- 1
   message('r = ', r)
   id <- name_ID12[r]
-  dlpfc <- readRDS(paste0(dir_file,id, ".rds"))
+  dlpfc <- readRDS(url(paste0(url_brainA, name_ID12[r],url_brainB) ))
   sp_count <- dlpfc@assays@data$counts
   meta.data <- as.data.frame(colData(dlpfc))
   ## Filter counts:
@@ -65,6 +67,7 @@ num_genes_eachbatch <- sapply(geneList_noSpa, length)
 HKfeatures <- selectHKFeatures(seulist_HK, geneList_noSpa, HKFeatures = 200) ## select top 200
 HKsymbols <- housekeep_genes[names(housekeep_genes) %in% HKfeatures]
 save(HKsymbols, file='housekeep_noSpa_top200genes_DLPFC12.rds')
+
 
 ## select the integrated HVGs
 gene_hvg_2000 <- selectIntFeatures(seuList_filter,HVGList) # 

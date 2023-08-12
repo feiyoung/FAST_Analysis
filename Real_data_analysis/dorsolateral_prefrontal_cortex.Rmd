@@ -1,0 +1,166 @@
+---
+title: "FAST: dorsolateral_prefrontal_cortex"
+author: "Wei Liu"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{FAST: dorsolateral_prefrontal_cortex}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+This Rmd file introduce how to apply FAST to obtain the embeddings for the dorsolateral prefrontal cortex Visium data. This is corresponding the `dorsolateral_prefrontal_cortex.R` file.
+
+
+## Source the required functions
+```{r  eval=TRUE}
+source("util_funcs.R")
+```
+
+
+## Start anslysis
+Load the required packages.
+```{r  eval=TRUE}
+library(ProFAST)
+library(SingleCellExperiment)
+library(Seurat)
+library(Matrix)
+library(dplyr)
+```
+
+
+## Load data and preprocessing ---------------------------------------------
+
+```{r  eval=TRUE}
+name_ID12 <- as.character(c(151507, 151508, 151509, 151510, 151669, 151670,
+                            151671, 151672, 151673, 151674, 151675, 151676))
+
+
+n_sample <- length(name_ID12)
+url_brainA <- "https://github.com/feiyoung/DR-SC.Analysis/raw/main/data/DLPFC_data/"; url_brainB <- ".rds"
+HVGList <- list()
+timeVec <- rep(NA, n_sample)
+seuList_filter <- list()
+for(r in 1:n_sample){
+  # r <- 1
+  
+  cat('input brain data', r, '\n')
+  # load and read data
+  dlpfc <- readRDS(url(paste0(url_brainA, name_ID12[r],url_brainB) ))
+  
+  sp_count <- dlpfc@assays@data$counts
+  meta.data <- as.data.frame(colData(dlpfc))
+  ## Filter counts:
+  min_spots <- 20
+  gene_flag <- rowSums(sp_count>0)>min_spots
+  sp_count_filter <-  sp_count[gene_flag, ]
+  min_genes <- 20
+  spot_flag <- colSums(sp_count>0) > min_genes
+  sp_count_filter <- sp_count_filter[, spot_flag]
+  
+  tic <- proc.time()
+  seu <- CreateSeuratObject(counts=sp_count_filter, meta.data = meta.data[spot_flag,])
+  seu <-  NormalizeData(seu)
+  seu <- FindVariableFeatures(seu)
+  toc <- proc.time()
+  var.features <- seu@assays$RNA@var.features
+  seuList_filter[[r]] <- seu
+  HVGList[[r]] <- var.features
+  timeVec[r] <- toc[3] - tic[3]
+}
+
+gene_intersect <- Reduce(intersect, lapply(seuList_filter, row.names))
+## transfer to symbols
+gene_symbols <- transferGeneNames(gene_intersect, species="Human")
+gene_symbols <- toupper(gene_symbols)
+names(gene_symbols) <- gene_intersect
+
+```
+
+
+Select the common variable genes
+```{r  eval=TRUE}
+## select the integrated HVGs
+gene_hvg_2000 <- selectIntFeatures(seuList_filter,HVGList) # 
+
+```
+
+## Get Log-nomalized data list
+
+```{r  eval=TRUE}
+
+seulist_hvg <- lapply(seuList_filter, function(x) x[gene_hvg_2000, ])
+yList <- lapply(seulist_hvg, function(x) x$layer_guess_reordered)
+for(r in 1:length(yList)){
+  y_true <- as.character(yList[[r]])
+  y_true[is.na(y_true)] <- "NA"
+  yList[[r]] <- y_true 
+}
+posList <- list()
+AdjList <- list()
+## To differetiate different sections by adding a large value for the coordinates
+## since SpatialPCA and DR-SC, used the spatial coordinates, are designed to handle one section.
+for(m in 1: length(seulist_hvg)){
+  message("m = ", m)
+  pos <- cbind(seulist_hvg[[m]]$row, seulist_hvg[[m]]$col)
+  AdjList[[m]] <- PRECAST::getAdj_reg(pos, platform = "Visium")
+  posList[[m]] <- pos + (m-1)* 1e6 
+  
+}
+
+seulist_hvg <- lapply(seulist_hvg, NormalizeData)
+XList1 <- lapply(seulist_hvg, function(x) Matrix::t(x[["RNA"]]@data))
+sum(sapply(XList1, nrow))
+
+```
+
+## Fit FAST-P
+First, we fit the Poisson version of FAST.
+```{r  eval=TRUE}
+hq <- 15
+
+XList_count <- lapply(seulist_hvg, function(x) Matrix::t(x[["RNA"]]@counts))
+tic <- proc.time()
+reslist_profastP <- ProFAST_run(XList_count, AdjList = AdjList, fit.model = "poisson", q=hq)
+toc <- proc.time()
+time_profastP <- toc[3] - tic[3]
+## save(reslist_profastP,time_profastP, file="reslist_hvg_profastP_DLPFC12.rds")
+
+## calculate the  Macffaden's R2 for each section
+(R2_profastP <- evaluate_DR_PF2(reslist_profastP$hV, yList))
+
+```
+
+## Fit FAST-G
+
+Next, we fit FAST-G.
+```{r  eval=TRUE}
+
+### Gaussian version 
+tic <- proc.time()
+reslist_profastG <- ProFAST_run(XList1, AdjList = AdjList, q=hq)
+toc <- proc.time()
+time_profastG <- toc[3] - tic[3]
+
+## calculate the  Macffaden's R2 for each section
+(R2_profastG <- evaluate_DR_PF2(reslist_profastG$hV, yList))
+```
+
+
+
+
+## Performance
+Output the Macffaden's R2 for each section.
+
+```{r  eval=TRUE}
+macR2 <- cbind(FAST_P=R2_profastP, FAST_G=R2_profastG)
+print(macR2)
+```
+
+
+<details>
+<summary>**Session Info**</summary>
+```{r}
+sessionInfo()
+```
+</details>

@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Wei Liu" />
+
+
+<title>FAST: dorsolateral_prefrontal_cortex</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">FAST: dorsolateral_prefrontal_cortex</h1>
+<h4 class="author">Wei Liu</h4>
+
+
+
+<p>This Rmd file introduce how to apply FAST to obtain the embeddings
+for the dorsolateral prefrontal cortex Visium data. This is
+corresponding the <code>dorsolateral_prefrontal_cortex.R</code>
+file.</p>
+<div id="source-the-required-functions" class="section level2">
+<h2>Source the required functions</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;util_funcs.R&quot;</span>)</span></code></pre></div>
+</div>
+<div id="start-anslysis" class="section level2">
+<h2>Start anslysis</h2>
+<p>Load the required packages.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ProFAST)</span></code></pre></div>
+<pre><code>## Loading required package: gtools</code></pre>
+<pre><code>## </code></pre>
+<pre><code>## </code></pre>
+<pre><code>## 
+## Attaching package: &#39;ProFAST&#39;</code></pre>
+<pre><code>## The following objects are masked _by_ &#39;.GlobalEnv&#39;:
+## 
+##     get_r2_mcfadden, transferGeneNames</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SingleCellExperiment)</span></code></pre></div>
+<pre><code>## Loading required package: SummarizedExperiment</code></pre>
+<pre><code>## Loading required package: MatrixGenerics</code></pre>
+<pre><code>## Loading required package: matrixStats</code></pre>
+<pre><code>## Warning: package &#39;matrixStats&#39; was built under R version 4.2.0</code></pre>
+<pre><code>## 
+## Attaching package: &#39;MatrixGenerics&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:matrixStats&#39;:
+## 
+##     colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+##     colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+##     colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+##     colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+##     colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+##     colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+##     colWeightedMeans, colWeightedMedians, colWeightedSds,
+##     colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+##     rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+##     rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+##     rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+##     rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+##     rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+##     rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+##     rowWeightedSds, rowWeightedVars</code></pre>
+<pre><code>## Loading required package: GenomicRanges</code></pre>
+<pre><code>## Loading required package: stats4</code></pre>
+<pre><code>## Loading required package: BiocGenerics</code></pre>
+<pre><code>## 
+## Attaching package: &#39;BiocGenerics&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     IQR, mad, sd, var, xtabs</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+##     dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+##     grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+##     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+##     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+##     union, unique, unsplit, which.max, which.min</code></pre>
+<pre><code>## Loading required package: S4Vectors</code></pre>
+<pre><code>## 
+## Attaching package: &#39;S4Vectors&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     expand.grid, I, unname</code></pre>
+<pre><code>## Loading required package: IRanges</code></pre>
+<pre><code>## Loading required package: GenomeInfoDb</code></pre>
+<pre><code>## Loading required package: Biobase</code></pre>
+<pre><code>## Welcome to Bioconductor
+## 
+##     Vignettes contain introductory material; view with
+##     &#39;browseVignettes()&#39;. To cite Bioconductor, see
+##     &#39;citation(&quot;Biobase&quot;)&#39;, and for packages &#39;citation(&quot;pkgname&quot;)&#39;.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;Biobase&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:MatrixGenerics&#39;:
+## 
+##     rowMedians</code></pre>
+<pre><code>## The following objects are masked from &#39;package:matrixStats&#39;:
+## 
+##     anyMissing, rowMedians</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Seurat)</span></code></pre></div>
+<pre><code>## Attaching SeuratObject</code></pre>
+<pre><code>## Attaching sp</code></pre>
+<pre><code>## 
+## Attaching package: &#39;Seurat&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:SummarizedExperiment&#39;:
+## 
+##     Assays</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Matrix)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;Matrix&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:S4Vectors&#39;:
+## 
+##     expand</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:Biobase&#39;:
+## 
+##     combine</code></pre>
+<pre><code>## The following objects are masked from &#39;package:GenomicRanges&#39;:
+## 
+##     intersect, setdiff, union</code></pre>
+<pre><code>## The following object is masked from &#39;package:GenomeInfoDb&#39;:
+## 
+##     intersect</code></pre>
+<pre><code>## The following objects are masked from &#39;package:IRanges&#39;:
+## 
+##     collapse, desc, intersect, setdiff, slice, union</code></pre>
+<pre><code>## The following objects are masked from &#39;package:S4Vectors&#39;:
+## 
+##     first, intersect, rename, setdiff, setequal, union</code></pre>
+<pre><code>## The following objects are masked from &#39;package:BiocGenerics&#39;:
+## 
+##     combine, intersect, setdiff, union</code></pre>
+<pre><code>## The following object is masked from &#39;package:matrixStats&#39;:
+## 
+##     count</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+</div>
+<div id="load-data-and-preprocessing" class="section level2">
+<h2>Load data and preprocessing ———————————————</h2>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>name_ID12 <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">c</span>(<span class="dv">151507</span>, <span class="dv">151508</span>, <span class="dv">151509</span>, <span class="dv">151510</span>, <span class="dv">151669</span>, <span class="dv">151670</span>,</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>                            <span class="dv">151671</span>, <span class="dv">151672</span>, <span class="dv">151673</span>, <span class="dv">151674</span>, <span class="dv">151675</span>, <span class="dv">151676</span>))</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>n_sample <span class="ot">&lt;-</span> <span class="fu">length</span>(name_ID12)</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>url_brainA <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/feiyoung/DR-SC.Analysis/raw/main/data/DLPFC_data/&quot;</span>; url_brainB <span class="ot">&lt;-</span> <span class="st">&quot;.rds&quot;</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>HVGList <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>timeVec <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n_sample)</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>seuList_filter <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sample){</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># r &lt;- 1</span></span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&#39;input brain data&#39;</span>, r, <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># load and read data</span></span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>  dlpfc <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">url</span>(<span class="fu">paste0</span>(url_brainA, name_ID12[r],url_brainB) ))</span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>  sp_count <span class="ot">&lt;-</span> dlpfc<span class="sc">@</span>assays<span class="sc">@</span>data<span class="sc">$</span>counts</span>
+<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a>  meta.data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(dlpfc))</span>
+<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Filter counts:</span></span>
+<span id="cb50-20"><a href="#cb50-20" aria-hidden="true" tabindex="-1"></a>  min_spots <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb50-21"><a href="#cb50-21" aria-hidden="true" tabindex="-1"></a>  gene_flag <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(sp_count<span class="sc">&gt;</span><span class="dv">0</span>)<span class="sc">&gt;</span>min_spots</span>
+<span id="cb50-22"><a href="#cb50-22" aria-hidden="true" tabindex="-1"></a>  sp_count_filter <span class="ot">&lt;-</span>  sp_count[gene_flag, ]</span>
+<span id="cb50-23"><a href="#cb50-23" aria-hidden="true" tabindex="-1"></a>  min_genes <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb50-24"><a href="#cb50-24" aria-hidden="true" tabindex="-1"></a>  spot_flag <span class="ot">&lt;-</span> <span class="fu">colSums</span>(sp_count<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">&gt;</span> min_genes</span>
+<span id="cb50-25"><a href="#cb50-25" aria-hidden="true" tabindex="-1"></a>  sp_count_filter <span class="ot">&lt;-</span> sp_count_filter[, spot_flag]</span>
+<span id="cb50-26"><a href="#cb50-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb50-27"><a href="#cb50-27" aria-hidden="true" tabindex="-1"></a>  tic <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
+<span id="cb50-28"><a href="#cb50-28" aria-hidden="true" tabindex="-1"></a>  seu <span class="ot">&lt;-</span> <span class="fu">CreateSeuratObject</span>(<span class="at">counts=</span>sp_count_filter, <span class="at">meta.data =</span> meta.data[spot_flag,])</span>
+<span id="cb50-29"><a href="#cb50-29" aria-hidden="true" tabindex="-1"></a>  seu <span class="ot">&lt;-</span>  <span class="fu">NormalizeData</span>(seu)</span>
+<span id="cb50-30"><a href="#cb50-30" aria-hidden="true" tabindex="-1"></a>  seu <span class="ot">&lt;-</span> <span class="fu">FindVariableFeatures</span>(seu)</span>
+<span id="cb50-31"><a href="#cb50-31" aria-hidden="true" tabindex="-1"></a>  toc <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
+<span id="cb50-32"><a href="#cb50-32" aria-hidden="true" tabindex="-1"></a>  var.features <span class="ot">&lt;-</span> seu<span class="sc">@</span>assays<span class="sc">$</span>RNA<span class="sc">@</span>var.features</span>
+<span id="cb50-33"><a href="#cb50-33" aria-hidden="true" tabindex="-1"></a>  seuList_filter[[r]] <span class="ot">&lt;-</span> seu</span>
+<span id="cb50-34"><a href="#cb50-34" aria-hidden="true" tabindex="-1"></a>  HVGList[[r]] <span class="ot">&lt;-</span> var.features</span>
+<span id="cb50-35"><a href="#cb50-35" aria-hidden="true" tabindex="-1"></a>  timeVec[r] <span class="ot">&lt;-</span> toc[<span class="dv">3</span>] <span class="sc">-</span> tic[<span class="dv">3</span>]</span>
+<span id="cb50-36"><a href="#cb50-36" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## input brain data 1 
+## input brain data 2 
+## input brain data 3 
+## input brain data 4 
+## input brain data 5 
+## input brain data 6 
+## input brain data 7 
+## input brain data 8 
+## input brain data 9 
+## input brain data 10 
+## input brain data 11 
+## input brain data 12</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>gene_intersect <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(intersect, <span class="fu">lapply</span>(seuList_filter, row.names))</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="do">## transfer to symbols</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>gene_symbols <span class="ot">&lt;-</span> <span class="fu">transferGeneNames</span>(gene_intersect, <span class="at">species=</span><span class="st">&quot;Human&quot;</span>)</span></code></pre></div>
+<pre><code>## Loading required package: biomaRt</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>gene_symbols <span class="ot">&lt;-</span> <span class="fu">toupper</span>(gene_symbols)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gene_symbols) <span class="ot">&lt;-</span> gene_intersect</span></code></pre></div>
+<p>Select the common variable genes</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="do">## select the integrated HVGs</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>gene_hvg_2000 <span class="ot">&lt;-</span> <span class="fu">selectIntFeatures</span>(seuList_filter,HVGList) <span class="co"># </span></span></code></pre></div>
+</div>
+<div id="get-log-nomalized-data-list" class="section level2">
+<h2>Get Log-nomalized data list</h2>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>seulist_hvg <span class="ot">&lt;-</span> <span class="fu">lapply</span>(seuList_filter, <span class="cf">function</span>(x) x[gene_hvg_2000, ])</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>yList <span class="ot">&lt;-</span> <span class="fu">lapply</span>(seulist_hvg, <span class="cf">function</span>(x) x<span class="sc">$</span>layer_guess_reordered)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(yList)){</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  y_true <span class="ot">&lt;-</span> <span class="fu">as.character</span>(yList[[r]])</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>  y_true[<span class="fu">is.na</span>(y_true)] <span class="ot">&lt;-</span> <span class="st">&quot;NA&quot;</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>  yList[[r]] <span class="ot">&lt;-</span> y_true </span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>posList <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>AdjList <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a><span class="do">## To differetiate different sections by adding a large value for the coordinates</span></span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a><span class="do">## since SpatialPCA and DR-SC, used the spatial coordinates, are designed to handle one section.</span></span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(m <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span> <span class="fu">length</span>(seulist_hvg)){</span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">&quot;m = &quot;</span>, m)</span>
+<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a>  pos <span class="ot">&lt;-</span> <span class="fu">cbind</span>(seulist_hvg[[m]]<span class="sc">$</span>row, seulist_hvg[[m]]<span class="sc">$</span>col)</span>
+<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a>  AdjList[[m]] <span class="ot">&lt;-</span> PRECAST<span class="sc">::</span><span class="fu">getAdj_reg</span>(pos, <span class="at">platform =</span> <span class="st">&quot;Visium&quot;</span>)</span>
+<span id="cb56-16"><a href="#cb56-16" aria-hidden="true" tabindex="-1"></a>  posList[[m]] <span class="ot">&lt;-</span> pos <span class="sc">+</span> (m<span class="dv">-1</span>)<span class="sc">*</span> <span class="fl">1e6</span> </span>
+<span id="cb56-17"><a href="#cb56-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb56-18"><a href="#cb56-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## m = 1</code></pre>
+<pre><code>## Neighbors were identified for 4226 out of 4226 spots.</code></pre>
+<pre><code>## m = 2</code></pre>
+<pre><code>## Neighbors were identified for 4381 out of 4384 spots.</code></pre>
+<pre><code>## m = 3</code></pre>
+<pre><code>## Neighbors were identified for 4789 out of 4789 spots.</code></pre>
+<pre><code>## m = 4</code></pre>
+<pre><code>## Neighbors were identified for 4633 out of 4633 spots.</code></pre>
+<pre><code>## m = 5</code></pre>
+<pre><code>## Neighbors were identified for 3658 out of 3661 spots.</code></pre>
+<pre><code>## m = 6</code></pre>
+<pre><code>## Neighbors were identified for 3495 out of 3498 spots.</code></pre>
+<pre><code>## m = 7</code></pre>
+<pre><code>## Neighbors were identified for 4110 out of 4110 spots.</code></pre>
+<pre><code>## m = 8</code></pre>
+<pre><code>## Neighbors were identified for 4015 out of 4015 spots.</code></pre>
+<pre><code>## m = 9</code></pre>
+<pre><code>## Neighbors were identified for 3638 out of 3639 spots.</code></pre>
+<pre><code>## m = 10</code></pre>
+<pre><code>## Neighbors were identified for 3670 out of 3673 spots.</code></pre>
+<pre><code>## m = 11</code></pre>
+<pre><code>## Neighbors were identified for 3586 out of 3592 spots.</code></pre>
+<pre><code>## m = 12</code></pre>
+<pre><code>## Neighbors were identified for 3456 out of 3460 spots.</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>seulist_hvg <span class="ot">&lt;-</span> <span class="fu">lapply</span>(seulist_hvg, NormalizeData)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>XList1 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(seulist_hvg, <span class="cf">function</span>(x) Matrix<span class="sc">::</span><span class="fu">t</span>(x[[<span class="st">&quot;RNA&quot;</span>]]<span class="sc">@</span>data))</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">sapply</span>(XList1, nrow))</span></code></pre></div>
+<pre><code>## [1] 47680</code></pre>
+</div>
+<div id="fit-fast-p" class="section level2">
+<h2>Fit FAST-P</h2>
+<p>First, we fit the Poisson version of FAST.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>hq <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>XList_count <span class="ot">&lt;-</span> <span class="fu">lapply</span>(seulist_hvg, <span class="cf">function</span>(x) Matrix<span class="sc">::</span><span class="fu">t</span>(x[[<span class="st">&quot;RNA&quot;</span>]]<span class="sc">@</span>counts))</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>tic <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>reslist_profastP <span class="ot">&lt;-</span> <span class="fu">ProFAST_run</span>(XList_count, <span class="at">AdjList =</span> AdjList, <span class="at">fit.model =</span> <span class="st">&quot;poisson&quot;</span>, <span class="at">q=</span>hq)</span></code></pre></div>
+<pre><code>## Finish variable initialization 
+## Satrt ICM step! 
+## iter = 2, ELBO= -2580283038.623288, dELBO=-0.201538 
+## Satrt ICM step! 
+## iter = 3, ELBO= -78690795.629670, dELBO=0.969503 
+## Satrt ICM step! 
+## iter = 4, ELBO= -74888842.677656, dELBO=0.048315 
+## Satrt ICM step! 
+## iter = 5, ELBO= -72195447.387468, dELBO=0.035965 
+## Satrt ICM step! 
+## iter = 6, ELBO= -69987705.294445, dELBO=0.030580 
+## Satrt ICM step! 
+## iter = 7, ELBO= -68103600.867630, dELBO=0.026921 
+## Satrt ICM step! 
+## iter = 8, ELBO= -66456850.472347, dELBO=0.024180 
+## Satrt ICM step! 
+## iter = 9, ELBO= -64993178.046743, dELBO=0.022024 
+## Satrt ICM step! 
+## iter = 10, ELBO= -63675592.221366, dELBO=0.020273 
+## Satrt ICM step! 
+## iter = 11, ELBO= -62477531.863715, dELBO=0.018815 
+## Satrt ICM step! 
+## iter = 12, ELBO= -61379212.696005, dELBO=0.017579 
+## Satrt ICM step! 
+## iter = 13, ELBO= -60365466.965651, dELBO=0.016516 
+## Satrt ICM step! 
+## iter = 14, ELBO= -59424391.337658, dELBO=0.015590 
+## Satrt ICM step! 
+## iter = 15, ELBO= -58546463.821064, dELBO=0.014774 
+## Satrt ICM step! 
+## iter = 16, ELBO= -57723939.904660, dELBO=0.014049 
+## Satrt ICM step! 
+## iter = 17, ELBO= -56950433.412121, dELBO=0.013400 
+## Satrt ICM step! 
+## iter = 18, ELBO= -56220611.828130, dELBO=0.012815 
+## Satrt ICM step! 
+## iter = 19, ELBO= -55529975.866329, dELBO=0.012284 
+## Satrt ICM step! 
+## iter = 20, ELBO= -54874691.698942, dELBO=0.011801 
+## Satrt ICM step! 
+## iter = 21, ELBO= -54251465.892220, dELBO=0.011357 
+## Satrt ICM step! 
+## iter = 22, ELBO= -53657446.689253, dELBO=0.010949 
+## Satrt ICM step! 
+## iter = 23, ELBO= -53090148.689862, dELBO=0.010573 
+## Satrt ICM step! 
+## iter = 24, ELBO= -52547391.606693, dELBO=0.010223 
+## Satrt ICM step! 
+## iter = 25, ELBO= -52027252.609512, dELBO=0.009898</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>toc <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>time_profastP <span class="ot">&lt;-</span> toc[<span class="dv">3</span>] <span class="sc">-</span> tic[<span class="dv">3</span>]</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="do">## save(reslist_profastP,time_profastP, file=&quot;reslist_hvg_profastP_DLPFC12.rds&quot;)</span></span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a><span class="do">## calculate the  Macffaden&#39;s R2 for each section</span></span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>(R2_profastP <span class="ot">&lt;-</span> <span class="fu">evaluate_DR_PF2</span>(reslist_profastP<span class="sc">$</span>hV, yList))</span></code></pre></div>
+<pre><code>## # weights:  136 (112 variable)
+## initial  value 8787.719955 
+## iter  10 value 1658.433074
+## iter  20 value 1398.641435
+## iter  30 value 1282.771526
+## iter  40 value 1140.655206
+## iter  50 value 988.490978
+## iter  60 value 921.683749
+## iter  70 value 859.388936
+## iter  80 value 815.492858
+## iter  90 value 749.308205
+## iter 100 value 676.599693
+## final  value 676.599693 
+## stopped after 100 iterations
+## # weights:  136 (112 variable)
+## initial  value 9116.271719 
+## iter  10 value 2567.451556
+## iter  20 value 1397.106964
+## iter  30 value 1136.971119
+## iter  40 value 959.631598
+## iter  50 value 815.092805
+## iter  60 value 763.589826
+## iter  70 value 724.984906
+## iter  80 value 703.388384
+## iter  90 value 685.067644
+## iter 100 value 643.189812
+## final  value 643.189812 
+## stopped after 100 iterations
+## # weights:  136 (112 variable)
+## initial  value 9958.445543 
+## iter  10 value 2518.341239
+## iter  20 value 1964.245447
+## iter  30 value 1832.338106
+## iter  40 value 1729.639898
+## iter  50 value 1413.155812
+## iter  60 value 1270.011188
+## iter  70 value 1033.160159
+## iter  80 value 906.137633
+## iter  90 value 821.929728
+## iter 100 value 749.825597
+## final  value 749.825597 
+## stopped after 100 iterations
+## # weights:  136 (112 variable)
+## initial  value 9634.052663 
+## iter  10 value 1780.113321
+## iter  20 value 1480.426370
+## iter  30 value 1374.783397
+## iter  40 value 1266.290428
+## iter  50 value 1044.883086
+## iter  60 value 973.743242
+## iter  70 value 905.733932
+## iter  80 value 824.653477
+## iter  90 value 784.096269
+## iter 100 value 741.200981
+## final  value 741.200981 
+## stopped after 100 iterations
+## # weights:  102 (80 variable)
+## initial  value 6559.631417 
+## iter  10 value 920.684419
+## iter  20 value 647.322801
+## iter  30 value 569.206196
+## iter  40 value 495.261675
+## iter  50 value 463.259736
+## iter  60 value 423.473845
+## iter  70 value 393.580954
+## iter  80 value 341.443209
+## iter  90 value 265.622128
+## iter 100 value 240.720746
+## final  value 240.720746 
+## stopped after 100 iterations
+## # weights:  102 (80 variable)
+## initial  value 6267.574623 
+## iter  10 value 953.984988
+## iter  20 value 797.253046
+## iter  30 value 715.899420
+## iter  40 value 580.677114
+## iter  50 value 512.990378
+## iter  60 value 461.514251
+## iter  70 value 410.873866
+## iter  80 value 360.168489
+## iter  90 value 316.263725
+## iter 100 value 301.162829
+## final  value 301.162829 
+## stopped after 100 iterations
+## # weights:  102 (80 variable)
+## initial  value 7364.131419 
+## iter  10 value 1361.502566
+## iter  20 value 1092.908073
+## iter  30 value 1012.782580
+## iter  40 value 897.934961
+## iter  50 value 734.066609
+## iter  60 value 602.898537
+## iter  70 value 456.512880
+## iter  80 value 353.922610
+## iter  90 value 301.536726
+## iter 100 value 277.917735
+## final  value 277.917735 
+## stopped after 100 iterations
+## # weights:  102 (80 variable)
+## initial  value 7193.914269 
+## iter  10 value 1621.062993
+## iter  20 value 1458.470205
+## iter  30 value 1391.904145
+## iter  40 value 1231.331033
+## iter  50 value 1012.324630
+## iter  60 value 848.216416
+## iter  70 value 691.101891
+## iter  80 value 589.518419
+## iter  90 value 514.719734
+## iter 100 value 497.873715
+## final  value 497.873715 
+## stopped after 100 iterations
+## # weights:  136 (112 variable)
+## initial  value 7567.087770 
+## iter  10 value 1569.319647
+## iter  20 value 1140.006041
+## iter  30 value 1044.742687
+## iter  40 value 978.328800
+## iter  50 value 881.143669
+## iter  60 value 798.598065
+## iter  70 value 723.586844
+## iter  80 value 682.860157
+## iter  90 value 633.985890
+## iter 100 value 591.086562
+## final  value 591.086562 
+## stopped after 100 iterations
+## # weights:  136 (112 variable)
+## initial  value 7637.788783 
+## iter  10 value 1789.770444
+## iter  20 value 1554.681133
+## iter  30 value 1452.623666
+## iter  40 value 1381.753948
+## iter  50 value 1221.594396
+## iter  60 value 1027.878266
+## iter  70 value 901.118272
+## iter  80 value 796.679104
+## iter  90 value 707.867789
+## iter 100 value 626.069671
+## final  value 626.069671 
+## stopped after 100 iterations
+## # weights:  136 (112 variable)
+## initial  value 7469.354018 
+## iter  10 value 1304.436048
+## iter  20 value 1039.639327
+## iter  30 value 972.552801
+## iter  40 value 886.537931
+## iter  50 value 792.293986
+## iter  60 value 740.235808
+## iter  70 value 718.393651
+## iter  80 value 683.897992
+## iter  90 value 671.045106
+## iter 100 value 647.509301
+## final  value 647.509301 
+## stopped after 100 iterations
+## # weights:  136 (112 variable)
+## initial  value 7194.867734 
+## iter  10 value 1362.175910
+## iter  20 value 1093.193963
+## iter  30 value 979.244547
+## iter  40 value 860.443579
+## iter  50 value 733.526731
+## iter  60 value 683.338087
+## iter  70 value 651.812017
+## iter  80 value 629.150358
+## iter  90 value 615.225013
+## iter 100 value 595.462174
+## final  value 595.462174 
+## stopped after 100 iterations</code></pre>
+<pre><code>##  [1] 0.9126736 0.9172351 0.9034766 0.9029248 0.9477903 0.9260051 0.9517261
+##  [8] 0.9195112 0.9117541 0.9092940 0.9047265 0.9084696</code></pre>
+</div>
+<div id="fit-fast-g" class="section level2">
+<h2>Fit FAST-G</h2>
+<p>Next, we fit FAST-G.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Gaussian version </span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>tic <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>reslist_profastG <span class="ot">&lt;-</span> <span class="fu">ProFAST_run</span>(XList1, <span class="at">AdjList =</span> AdjList, <span class="at">q=</span>hq)</span></code></pre></div>
+<pre><code>## Finish variable intialization 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 2, loglik= -214244.057238, dloglik=0.999900 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 3, loglik= -38526.331198, dloglik=0.820175 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 4, loglik= -3218.548030, dloglik=0.916458 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 5, loglik= 14468.231328, dloglik=5.495267 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 6, loglik= 24657.953087, dloglik=0.704282 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 7, loglik= 30840.435106, dloglik=0.250730 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 8, loglik= 34637.755366, dloglik=0.123128 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 9, loglik= 37008.016430, dloglik=0.068430 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 10, loglik= 38522.059665, dloglik=0.040911 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 11, loglik= 39516.518203, dloglik=0.025815 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 12, loglik= 40186.626854, dloglik=0.016958 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 13, loglik= 40648.327290, dloglik=0.011489 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 14, loglik= 40971.967302, dloglik=0.007962 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 15, loglik= 41201.934827, dloglik=0.005613 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 16, loglik= 41366.821975, dloglik=0.004002 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 17, loglik= 41485.716774, dloglik=0.002874 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 18, loglik= 41571.523863, dloglik=0.002068 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 19, loglik= 41633.249257, dloglik=0.001485 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 20, loglik= 41677.212704, dloglik=0.001056 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 21, loglik= 41707.979647, dloglik=0.000738 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 22, loglik= 41728.847316, dloglik=0.000500 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 23, loglik= 41742.262581, dloglik=0.000321 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 24, loglik= 41750.032357, dloglik=0.000186 
+## Satrt ICM and E-step! 
+## Finish ICM and E-step! 
+## iter = 25, loglik= 41753.525752, dloglik=0.000084</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>toc <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>time_profastG <span class="ot">&lt;-</span> toc[<span class="dv">3</span>] <span class="sc">-</span> tic[<span class="dv">3</span>]</span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="do">## calculate the  Macffaden&#39;s R2 for each section</span></span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a>(R2_profastG <span class="ot">&lt;-</span> <span class="fu">evaluate_DR_PF2</span>(reslist_profastG<span class="sc">$</span>hV, yList))</span></code></pre></div>
+<pre><code>## # weights:  136 (112 variable)
+## initial  value 8787.719955 
+## iter  10 value 1980.243285
+## iter  20 value 1503.820623
+## iter  30 value 1346.537536
+## iter  40 value 1201.110940
+## iter  50 value 1089.031478
+## iter  60 value 1056.273911
+## iter  70 value 1033.268224
+## iter  80 value 1016.178988
+## iter  90 value 1000.139955
+## iter 100 value 967.789850
+## final  value 967.789850 
+## stopped after 100 iterations
+## # weights:  136 (112 variable)
+## initial  value 9116.271719 
+## iter  10 value 2103.044050
+## iter  20 value 1951.315251
+## iter  30 value 1853.210458
+## iter  40 value 1703.062849
+## iter  50 value 1523.509505
+## iter  60 value 1409.896397
+## iter  70 value 1296.359275
+## iter  80 value 1234.133308
+## iter  90 value 1130.192275
+## iter 100 value 1069.716479
+## final  value 1069.716479 
+## stopped after 100 iterations
+## # weights:  136 (112 variable)
+## initial  value 9958.445543 
+## iter  10 value 2414.221299
+## iter  20 value 1635.019227
+## iter  30 value 1462.280975
+## iter  40 value 1198.638314
+## iter  50 value 1099.363062
+## iter  60 value 1025.748913
+## iter  70 value 969.992346
+## iter  80 value 945.554311
+## iter  90 value 936.798779
+## iter 100 value 928.440204
+## final  value 928.440204 
+## stopped after 100 iterations
+## # weights:  136 (112 variable)
+## initial  value 9634.052663 
+## iter  10 value 2539.655994
+## iter  20 value 1803.210599
+## iter  30 value 1585.089171
+## iter  40 value 1330.133591
+## iter  50 value 1223.928842
+## iter  60 value 1174.449130
+## iter  70 value 1134.795460
+## iter  80 value 1110.073304
+## iter  90 value 1097.753088
+## iter 100 value 1090.985726
+## final  value 1090.985726 
+## stopped after 100 iterations
+## # weights:  102 (80 variable)
+## initial  value 6559.631417 
+## iter  10 value 2092.867879
+## iter  20 value 1373.439873
+## iter  30 value 1141.062333
+## iter  40 value 830.373794
+## iter  50 value 771.783861
+## iter  60 value 701.091868
+## iter  70 value 634.765980
+## iter  80 value 579.659528
+## iter  90 value 540.496737
+## iter 100 value 505.710259
+## final  value 505.710259 
+## stopped after 100 iterations
+## # weights:  102 (80 variable)
+## initial  value 6267.574623 
+## iter  10 value 1313.948681
+## iter  20 value 919.705237
+## iter  30 value 804.806524
+## iter  40 value 683.457576
+## iter  50 value 635.312157
+## iter  60 value 571.169639
+## iter  70 value 521.421778
+## iter  80 value 474.501330
+## iter  90 value 426.098823
+## iter 100 value 396.194417
+## final  value 396.194417 
+## stopped after 100 iterations
+## # weights:  102 (80 variable)
+## initial  value 7364.131419 
+## iter  10 value 1736.110036
+## iter  20 value 1395.128379
+## iter  30 value 1160.909123
+## iter  40 value 844.499081
+## iter  50 value 757.578926
+## iter  60 value 665.568382
+## iter  70 value 606.699158
+## iter  80 value 574.918025
+## iter  90 value 545.636983
+## iter 100 value 516.095639
+## final  value 516.095639 
+## stopped after 100 iterations
+## # weights:  102 (80 variable)
+## initial  value 7193.914269 
+## iter  10 value 1419.577272
+## iter  20 value 1286.536428
+## iter  30 value 1177.953561
+## iter  40 value 1122.438809
+## iter  50 value 1068.929308
+## iter  60 value 1021.291585
+## iter  70 value 976.713959
+## iter  80 value 934.567161
+## iter  90 value 894.279339
+## iter 100 value 881.478545
+## final  value 881.478545 
+## stopped after 100 iterations
+## # weights:  136 (112 variable)
+## initial  value 7567.087770 
+## iter  10 value 1813.359201
+## iter  20 value 1594.405531
+## iter  30 value 1499.824665
+## iter  40 value 1358.478613
+## iter  50 value 1236.843467
+## iter  60 value 1099.591650
+## iter  70 value 1048.309246
+## iter  80 value 989.818286
+## iter  90 value 950.277829
+## iter 100 value 924.974284
+## final  value 924.974284 
+## stopped after 100 iterations
+## # weights:  136 (112 variable)
+## initial  value 7637.788783 
+## iter  10 value 1733.533108
+## iter  20 value 1455.409467
+## iter  30 value 1334.914728
+## iter  40 value 1187.380846
+## iter  50 value 1070.097206
+## iter  60 value 943.184567
+## iter  70 value 904.597256
+## iter  80 value 860.415128
+## iter  90 value 830.932024
+## iter 100 value 799.105222
+## final  value 799.105222 
+## stopped after 100 iterations
+## # weights:  136 (112 variable)
+## initial  value 7469.354018 
+## iter  10 value 2005.273269
+## iter  20 value 1746.158649
+## iter  30 value 1640.889321
+## iter  40 value 1484.439162
+## iter  50 value 1314.808203
+## iter  60 value 1184.173885
+## iter  70 value 1153.972104
+## iter  80 value 1134.216869
+## iter  90 value 1104.524616
+## iter 100 value 1078.951108
+## final  value 1078.951108 
+## stopped after 100 iterations
+## # weights:  136 (112 variable)
+## initial  value 7194.867734 
+## iter  10 value 2150.129209
+## iter  20 value 1504.541361
+## iter  30 value 1342.876589
+## iter  40 value 1193.698625
+## iter  50 value 1030.840187
+## iter  60 value 984.573942
+## iter  70 value 958.897026
+## iter  80 value 925.089209
+## iter  90 value 908.002406
+## iter 100 value 887.332876
+## final  value 887.332876 
+## stopped after 100 iterations</code></pre>
+<pre><code>##  [1] 0.8751462 0.8624353 0.8805145 0.8571752 0.8905548 0.9027333 0.9105033
+##  [8] 0.8576201 0.8619907 0.8842643 0.8413427 0.8636804</code></pre>
+</div>
+<div id="performance" class="section level2">
+<h2>Performance</h2>
+<p>Output the Macffaden’s R2 for each section.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>macR2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">FAST_P=</span>R2_profastP, <span class="at">FAST_G=</span>R2_profastG)</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(macR2)</span></code></pre></div>
+<pre><code>##          FAST_P    FAST_G
+##  [1,] 0.9126736 0.8751462
+##  [2,] 0.9172351 0.8624353
+##  [3,] 0.9034766 0.8805145
+##  [4,] 0.9029248 0.8571752
+##  [5,] 0.9477903 0.8905548
+##  [6,] 0.9260051 0.9027333
+##  [7,] 0.9517261 0.9105033
+##  [8,] 0.9195112 0.8576201
+##  [9,] 0.9117541 0.8619907
+## [10,] 0.9092940 0.8842643
+## [11,] 0.9047265 0.8413427
+## [12,] 0.9084696 0.8636804</code></pre>
+<details>
+<summary>
+<strong>Session Info</strong>
+</summary>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<pre><code>## R version 4.1.3 (2022-03-10)
+## Platform: x86_64-conda-linux-gnu (64-bit)
+## Running under: CentOS Linux 7 (Core)
+## 
+## Matrix products: default
+## BLAS/LAPACK: /home/weiliu/miniconda3/envs/r420/lib/libopenblasp-r0.3.20.so
+## 
+## locale:
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+## 
+## attached base packages:
+## [1] stats4    stats     graphics  grDevices utils     datasets  methods  
+## [8] base     
+## 
+## other attached packages:
+##  [1] performance_0.10.1          nnet_7.3-17                
+##  [3] biomaRt_2.50.3              dplyr_1.0.10               
+##  [5] Matrix_1.5-3                sp_1.5-0                   
+##  [7] SeuratObject_4.1.1          Seurat_4.1.1               
+##  [9] SingleCellExperiment_1.16.0 SummarizedExperiment_1.24.0
+## [11] Biobase_2.54.0              GenomicRanges_1.46.1       
+## [13] GenomeInfoDb_1.30.1         IRanges_2.28.0             
+## [15] S4Vectors_0.32.4            BiocGenerics_0.40.0        
+## [17] MatrixGenerics_1.6.0        matrixStats_0.62.0         
+## [19] ProFAST_1.2                 gtools_3.9.3               
+## [21] ggplot2_3.4.0              
+## 
+## loaded via a namespace (and not attached):
+##   [1] utf8_1.2.2                reticulate_1.26          
+##   [3] tidyselect_1.1.2          RSQLite_2.2.15           
+##   [5] AnnotationDbi_1.56.2      htmlwidgets_1.5.4        
+##   [7] grid_4.1.3                BiocParallel_1.28.3      
+##   [9] Rtsne_0.16                munsell_0.5.0            
+##  [11] ScaledMatrix_1.2.0        codetools_0.2-18         
+##  [13] ica_1.0-3                 future_1.33.0            
+##  [15] miniUI_0.1.1.1            withr_2.5.0              
+##  [17] spatstat.random_3.0-1     colorspace_2.0-3         
+##  [19] progressr_0.11.0          filelock_1.0.2           
+##  [21] knitr_1.39                ROCR_1.0-11              
+##  [23] ggsignif_0.6.4            tensor_1.5               
+##  [25] listenv_0.8.0             harmony_0.1.0            
+##  [27] GenomeInfoDbData_1.2.7    polyclip_1.10-0          
+##  [29] bit64_4.0.5               parallelly_1.36.0        
+##  [31] vctrs_0.5.1               generics_0.1.3           
+##  [33] xfun_0.32                 BiocFileCache_2.2.1      
+##  [35] ggthemes_4.2.4            R6_2.5.1                 
+##  [37] ggbeeswarm_0.6.0          rsvd_1.0.5               
+##  [39] bitops_1.0-7              spatstat.utils_3.0-1     
+##  [41] cachem_1.0.6              DelayedArray_0.20.0      
+##  [43] assertthat_0.2.1          promises_1.2.0.1         
+##  [45] scales_1.2.1              rgeos_0.5-9              
+##  [47] beeswarm_0.4.0            gtable_0.3.1             
+##  [49] org.Mm.eg.db_3.14.0       beachmat_2.10.0          
+##  [51] globals_0.16.1            goftest_1.2-3            
+##  [53] rlang_1.0.6               splines_4.1.3            
+##  [55] rstatix_0.7.1             lazyeval_0.2.2           
+##  [57] spatstat.geom_3.0-3       broom_1.0.1              
+##  [59] yaml_2.3.5                reshape2_1.4.4           
+##  [61] abind_1.4-5               backports_1.4.1          
+##  [63] httpuv_1.6.5              tools_4.1.3              
+##  [65] ellipsis_0.3.2            spatstat.core_2.4-4      
+##  [67] jquerylib_0.1.4           RColorBrewer_1.1-3       
+##  [69] ggridges_0.5.3            Rcpp_1.0.10              
+##  [71] plyr_1.8.7                progress_1.2.2           
+##  [73] sparseMatrixStats_1.6.0   zlibbioc_1.40.0          
+##  [75] purrr_0.3.4               RCurl_1.98-1.8           
+##  [77] prettyunits_1.1.1         ggpubr_0.5.0             
+##  [79] rpart_4.1.16              deldir_1.0-6             
+##  [81] pbapply_1.5-0             viridis_0.6.2            
+##  [83] cowplot_1.1.1             zoo_1.8-10               
+##  [85] ggrepel_0.9.1             cluster_2.1.3            
+##  [87] magrittr_2.0.3            GiRaF_1.0.1              
+##  [89] data.table_1.14.2         scattermore_0.8          
+##  [91] lmtest_0.9-40             RANN_2.6.1               
+##  [93] fitdistrplus_1.1-8        PRECAST_1.6.2            
+##  [95] hms_1.1.1                 patchwork_1.1.2          
+##  [97] mime_0.12                 evaluate_0.16            
+##  [99] xtable_1.8-4              XML_3.99-0.10            
+## [101] mclust_5.4.10             gridExtra_2.3            
+## [103] compiler_4.1.3            scater_1.22.0            
+## [105] tibble_3.1.8              KernSmooth_2.23-20       
+## [107] crayon_1.5.1              htmltools_0.5.3          
+## [109] mgcv_1.8-40               later_1.3.0              
+## [111] tidyr_1.2.0               DBI_1.1.3                
+## [113] dbplyr_2.2.1              rappdirs_0.3.3           
+## [115] MASS_7.3-58.1             car_3.1-1                
+## [117] cli_3.4.1                 insight_0.18.8           
+## [119] parallel_4.1.3            igraph_1.3.4             
+## [121] DR.SC_3.3                 pkgconfig_2.0.3          
+## [123] plotly_4.10.0             scuttle_1.4.0            
+## [125] spatstat.sparse_3.0-0     xml2_1.3.3               
+## [127] vipor_0.4.5               bslib_0.4.0              
+## [129] XVector_0.34.0            CompQuadForm_1.4.3       
+## [131] stringr_1.4.1             digest_0.6.29            
+## [133] sctransform_0.3.4         RcppAnnoy_0.0.19         
+## [135] spatstat.data_3.0-0       Biostrings_2.62.0        
+## [137] rmarkdown_2.18            leiden_0.4.2             
+## [139] uwot_0.1.14               DelayedMatrixStats_1.16.0
+## [141] curl_4.3.2                shiny_1.7.2              
+## [143] lifecycle_1.0.3           nlme_3.1-160             
+## [145] jsonlite_1.8.3            carData_3.0-5            
+## [147] BiocNeighbors_1.12.0      viridisLite_0.4.1        
+## [149] fansi_1.0.3               pillar_1.8.1             
+## [151] lattice_0.20-45           KEGGREST_1.34.0          
+## [153] fastmap_1.1.0             httr_1.4.4               
+## [155] survival_3.4-0            glue_1.6.2               
+## [157] png_0.1-7                 bit_4.0.4                
+## [159] stringi_1.7.8             sass_0.4.2               
+## [161] blob_1.2.3                org.Hs.eg.db_3.14.0      
+## [163] BiocSingular_1.10.0       memoise_2.0.1            
+## [165] irlba_2.3.5               future.apply_1.9.0</code></pre>
+</details>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
