@@ -74,10 +74,18 @@ gene_hvg_2000 <- selectIntFeatures(seuList_filter,HVGList) #
 save(gene_hvg_2000, file='gene_hvg_2000_DLPFC12.rds')
 
 seulist_hvg <- lapply(seuList_filter, function(x) x[gene_hvg_2000, ])
+### Remove NA in annotataion
+seulist_hvg <- lapply(seulist_hvg, function(x){
+  idx <- which(!is.na(x$layer_guess_reordered))
+  x[,idx]
+})
+
+
 yList <- lapply(seulist_hvg, function(x) x$layer_guess_reordered)
+nvec <- sapply(yList, length)
 for(r in 1:length(yList)){
   y_true <- as.character(yList[[r]])
-  y_true[is.na(y_true)] <- "NA"
+  # y_true[is.na(y_true)] <- "NA"
   yList[[r]] <- y_true 
 }
 posList <- list()
@@ -140,6 +148,218 @@ save(reslist_profastP,time_profastP, file="reslist_hvg_profastP_DLPFC12.rds")
 
 
 
+# Change embedding dimension ----------------------------------------------
+
+# Sensitivity analysis for different q ------------------------------------
+
+qvec <- c(5,  10,  15,  20, 25, 30)
+embed_qs_FASTG <- list()
+embed_qs_FASTP <- list()
+for(iq in 1:length(qvec)){
+  # iq <- 1
+  q_tmp <- qvec[iq]
+  tic <- proc.time()
+  reslist_hvg_log_tmp <- FAST_run(XList, AdjList, q=q_tmp)
+  toc <- proc.time()
+  embed_qs_FASTG[[iq]] <- reslist_hvg_log_tmp$hV
+  tic <- proc.time()
+  reslist_hvg_count_tmp <- FAST_run(XList_count, AdjList,  q=q_tmp, fit.model = 'poisson') 
+  toc <- proc.time()
+  embed_qs_FASTP[[iq]] <- reslist_hvg_count_tmp$hV
+  
+}
+save(qvec, embed_qs_FASTG, embed_qs_FASTP, file='embedlist_qs_FAST.rds')
+
+
+### use iSC-MEB to investigate the clustering performance
+embedList_FASTG_qs_align <- list()
+clusterList_FASTG_qs_align <- list()
+clusterList_PF_FASTG_qs_align <- list()
+for(iq in 1:length(qvec)){
+  # iq <-  1
+  tic <- proc.time()
+  reslist_iscmeb_FAST_tmp <- fit.iscmeb(
+    embed_qs_FASTG[[iq]],
+    AdjList,
+    K=K_true,
+    beta_grid = seq(0, 5, by = 0.2),
+    maxIter_ICM = 6,
+    maxIter = 25,
+    init.start=2,
+    epsLogLik = 1e-05,
+    coreNum = 1,
+    verbose = TRUE)
+  toc <- proc.time()
+  time_use <- toc[3] - tic[3]
+  embedList_FASTG_qs_align[[iq]] <- reslist_iscmeb_FAST_tmp@reduction$iSCMEB
+  clusterList_FASTG_qs_align[[iq]] <- reslist_iscmeb_FAST_tmp@idents
+  clusterList_PF_FASTG_qs_align[[iq]] <- evaluate_clusterPF(yList, clusterList_FASTG_qs_align[[iq]])
+}
+save(embedList_FASTG_qs_align, clusterList_FASTG_qs_align, file='embedAlign_cluster_qs_FASTG_DLPFC12.rds')
+save(qvec, clusterList_PF_FASTG_qs_align, file= 'clusterPF_qs_FASTG_DLPFC12.rds')
+
+
+embedList_FASTP_qs_align <- list()
+clusterList_FASTP_qs_align <- list()
+clusterList_PF_FASTP_qs_align <- list()
+for(iq in 1:length(qvec)){
+  # iq <-  1
+  tic <- proc.time()
+  reslist_iscmeb_FAST_tmp <- fit.iscmeb(
+    embed_qs_FASTP[[iq]],
+    AdjList,
+    K=K_true,
+    beta_grid = seq(0, 5, by = 0.2),
+    maxIter_ICM = 6,
+    maxIter = 25,
+    init.start=2,
+    epsLogLik = 1e-05,
+    coreNum = 1,
+    verbose = TRUE)
+  toc <- proc.time()
+  time_use <- toc[3] - tic[3]
+  embedList_FASTP_qs_align[[iq]] <- reslist_iscmeb_FAST_tmp@reduction$iSCMEB
+  clusterList_FASTP_qs_align[[iq]] <- reslist_iscmeb_FAST_tmp@idents
+  clusterList_PF_FASTP_qs_align[[iq]] <- evaluate_clusterPF(yList, clusterList_FASTP_qs_align[[iq]])
+}
+save(embedList_FASTP_qs_align, clusterList_FASTP_qs_align, file='embedAlign_cluster_qs_FASTP_DLPFC12.rds')
+
+save(qvec, clusterList_PF_FASTP_qs_align, file= 'clusterPF_qs_FASTP_DLPFC12.rds')
+
+
+# Sensitivity to the neighbors --------------------------------------------
+neighbor_vec <- c( 8, 12,  20, 36, 50)
+neighbor_true <- c(8, 12, 20, 36, 48)
+embed_neis_FASTG <- list()
+embed_neis_FASTP <- list()
+for(i_nei in 1:length(neighbor_vec)){
+  # i_nei <- 1
+  nei <- neighbor_vec[i_nei]
+  AdjList_tmp <- list()
+  for(m in 1: length(seulist_hvg)){
+    # m <- 2
+    message("m = ", m)
+    pos <- cbind(seulist_hvg[[m]]$row, seulist_hvg[[m]]$col)
+    out_try <- try({AdjList_tmp[[m]] <- DR.SC::getAdj_auto(pos, lower.med = nei-1, upper.med = nei+1)},
+                   silent=TRUE)
+    if(class(out_try)=="try-error"){
+      AdjList_tmp[[m]] <- DR.SC::getAdj_auto(pos, lower.med = nei-1, upper.med = nei+1, radius.upper = 10)
+    }
+    
+  }
+  reslist_FASTG_tmp <- FAST_run(XList, AdjList_tmp, q=hq)
+  embed_neis_FASTG[[i_nei]] <- reslist_FASTG_tmp$hV
+  ## Poisson model
+  # XList_count <- lapply(seulist_hvg, function(x) Matrix::t(x[["RNA"]]@counts))
+  # XList_count <- lapply(XList_count, as.matrix)
+  reslist_FASTP_tmp <- FAST_run(XList_count, AdjList_tmp,  q=hq, fit.model = 'poisson') 
+  embed_neis_FASTP[[i_nei]] <- reslist_FASTP_tmp$hV
+  
+}
+save(neighbor_vec, neighbor_true, embed_neis_FASTG, embed_neis_FASTP, file='embedlist_neighbors_FAST.rds')
+
+
+
+embedList_FASTP_neis_align <- list()
+clusterList_FASTP_neis_align <- list()
+clusterList_PF_FASTP_neis_align <- list()
+embedList_FASTG_neis_align <- list()
+clusterList_FASTG_neis_align <- list()
+clusterList_PF_FASTG_neis_align <- list()
+for(i_nei in 1:length(neighbor_vec)){
+  ## i_nei <- 1
+  reslist_iscmeb_FAST_tmp <- fit.iscmeb(
+    embed_neis_FASTP[[i_nei]],
+    AdjList,
+    K=K_true,
+    beta_grid = seq(0, 5, by = 0.2),
+    maxIter_ICM = 6,
+    maxIter = 25,
+    init.start=2,
+    epsLogLik = 1e-05,
+    coreNum = 1,
+    verbose = TRUE)
+  toc <- proc.time()
+  time_use <- toc[3] - tic[3]
+  embedList_FASTP_neis_align[[i_nei]] <- reslist_iscmeb_FAST_tmp@reduction$iSCMEB
+  clusterList_FASTP_neis_align[[i_nei]] <- reslist_iscmeb_FAST_tmp@idents
+  clusterList_PF_FASTP_neis_align[[i_nei]] <- evaluate_clusterPF(yList, clusterList_FASTP_neis_align[[i_nei]])
+  
+  
+  reslist_iscmeb_FAST_tmp <- fit.iscmeb(
+    embed_neis_FASTG[[i_nei]],
+    AdjList,
+    K=K_true,
+    beta_grid = seq(0, 5, by = 0.2),
+    maxIter_ICM = 6,
+    maxIter = 25,
+    init.start=2,
+    epsLogLik = 1e-05,
+    coreNum = 1,
+    verbose = TRUE)
+  toc <- proc.time()
+  time_use <- toc[3] - tic[3]
+  embedList_FASTG_neis_align[[i_nei]] <- reslist_iscmeb_FAST_tmp@reduction$iSCMEB
+  clusterList_FASTG_neis_align[[i_nei]] <- reslist_iscmeb_FAST_tmp@idents
+  clusterList_PF_FASTG_neis_align[[i_nei]] <- evaluate_clusterPF(yList, clusterList_FASTG_neis_align[[i_nei]])
+  
+}
+
+save(embedList_FASTP_neis_align, clusterList_FASTP_neis_align, 
+     embedList_FASTG_neis_align, clusterList_FASTG_neis_align, file='embedAlign_cluster_neis_FASTPG_DLPFC12.rds')
+save(neighbor_vec, neighbor_true,clusterList_PF_FASTP_neis_align,
+     clusterList_PF_FASTG_neis_align, file= 'clusterPF_neis_FASTPG_DLPFC12.rds')
+
+
+# FAST's copmatibility with BASS--------------------------------------------------
+cntList <- lapply(seulist_hvg, function(x) x@assays$RNA@counts)
+posList <- lapply(seulist_hvg, function(x) as.matrix(x@meta.data[,c("row", 'col')]))
+# remotes::install_github("zhengli09/BASS")
+
+nPC <- 15
+require(BASS)
+tic_bass_raw <- proc.time()
+set.seed(0)
+# Set up BASS object
+C <- 20; R <- 7; hq <- 15
+BASS_raw <- createBASSObject(X=cntList, xy=posList, C = C, R = R,
+                             beta_method = "SW", init_method = "mclust", 
+                             nsample = 10000)
+BASS_raw <- BASS.preprocess(BASS_raw, doLogNormalize = TRUE,
+                            geneSelect = "hvgs", doPCA = TRUE, 
+                            scaleFeature = FALSE, nPC = hq)
+# Run BASS algorithm
+# BASS_raw@X_run  
+# num [1:15, 1:47328]  ## Replace X_run by Harmony corrected FASTp
+library(harmony)
+set.seed(1)
+load("SpaMFactor_reslist_hvg_count1_brain12.rds")
+sampleID <- get_sampleID(reslist_hvg_count$hV)
+hZ_harmony_FASTP <- HarmonyMatrix(matlist2mat(reslist_hvg_count$hV), meta_data = data.frame(sample = sampleID),
+                                  vars_use = "sample", do_pca = F)
+BASS_raw@X_run  <- t(hZ_harmony_FASTP)
+BASS_raw <- BASS.run(BASS_raw)
+BASS_raw <- BASS.postprocess(BASS_raw)
+zlabels_raw <- BASS_raw@results$z # spatial domain labels
+clusterPF_bass_fastp <- evaluate_clusterPF(yList, zlabels_raw)
+save(zlabels_raw, clusterPF_bass_fastp, file='zlabels_raw_FASTP_BASS_DLPFC12.rds')
+
+
+### Directly use BASS rather than FAST's embeddings.
+# BASS_orig <- createBASSObject(X=cntList, xy=posList, C = C, R = R,
+#                              beta_method = "SW", init_method = "mclust", 
+#                              nsample = 10000)
+BASS_orig <- BASS.preprocess(BASS_raw, doLogNormalize = TRUE,
+                             geneSelect = "hvgs", doPCA = TRUE, 
+                             scaleFeature = FALSE, nPC = hq)
+str(BASS_orig@X_run)
+BASS_orig <- BASS.run(BASS_orig)
+BASS_orig <- BASS.postprocess(BASS_orig)
+zlabels_orig <- BASS_orig@results$z # spatial domain labels
+clusterPF_bass_orig  <- evaluate_clusterPF(yList, zlabels_orig)
+save(zlabels_orig, clusterPF_bass_orig, file='zlabels_orig_BASS_DLPFC12.rds')
+
+
 
 # Downstream analysis -----------------------------------------------------
 
@@ -148,58 +368,47 @@ save(reslist_profastP,time_profastP, file="reslist_hvg_profastP_DLPFC12.rds")
 ## output the function in ProFAST because fit.iscmeb() is now embeded in the R package but not exported.
 fit.iscmeb <- ProFAST:::fit.iscmeb
 
-embed_uncorrectList <- list()
-embed_uncorrectList[["ProFAST-G"]] <- reslist_profastG$hV
-embed_uncorrectList[["ProFAST-P"]] <- reslist_profastP$hV
-sampleID <- get_sampleID(posList)
-hamonyallList <- list()
-library(harmony)
-methods2 <- c("ProFAST-G","ProFAST-P")
-for(im in methods2){
-  message("im = ", im)
-  tic <- proc.time()
-  PCs_all <- matlist2mat(embed_uncorrectList[[im]])
-  hZ_harmony <- HarmonyMatrix(PCs_all, meta_data = data.frame(sample = sampleID),
-                              vars_use = "sample", do_pca = F)
-  toc <- proc.time()
-  hamonyallList[[im]] <- hZ_harmony
-}
-
-### Determine the number of clusters for ProFAST-P
-res_louvain_profastP <- drLouvain(hamonyallList[["ProFAST-P"]], resolution = 0.2)
-res_louvain_profastG <- drLouvain(hamonyallList[["ProFAST-G"]], resolution = 0.2)
-
-hK_profastP  <- length(unique(res_louvain_profastP))
-tic <- proc.time()
-reslist_iscmeb_profastP <- fit.iscmeb(
-  reslist_profastP$hV,
-  AdjList,
-  K=hK_profastP,
-  beta_grid = seq(0, 5, by = 0.2),
-  maxIter_ICM = 6,
-  maxIter = 25, # 25
-  epsLogLik = 1e-05,
-  verbose = TRUE)
-toc <- proc.time()
-time_iscmeb_profastP <- toc[3] - tic[3]
-save(reslist_iscmeb_profastP,time_iscmeb_profastP, file='reslist_iscmeb_profastP_DLPFC12.rds')
-
-hK_profastG <- length(unique(res_louvain_profastG)) 
+K_true <- 7
+fit.iscmeb <- ProFAST:::fit.iscmeb
 tic <- proc.time()
 reslist_iscmeb_profastG <- fit.iscmeb(
-  reslist_profastG$hV,
+  reslist_hvg_log$hV,
   AdjList,
-  K=hK_profastG,
+  K=K_true,
   beta_grid = seq(0, 5, by = 0.2),
   maxIter_ICM = 6,
   maxIter = 25,
-  init.start=5,
+  init.start=2,
   epsLogLik = 1e-05,
   coreNum = 1,
   verbose = TRUE)
 toc <- proc.time()
 time_iscmeb_profastG <- toc[3] - tic[3]
 save(reslist_iscmeb_profastG, time_iscmeb_profastG, file='reslist_iscmeb_profastG_DLPFC12.rds')
+table(unlist(reslist_iscmeb_profastG@idents))
+hy_profastG <- reslist_iscmeb_profastG@idents
+cluster_pf_profastG <- evaluate_clusterPF(hy_profastG, yList)
+save(cluster_pf_profastG, hy_profastG, file='cluster_pf_profastG_DLPFC12.rds')
+
+tic <- proc.time()
+reslist_iscmeb_profastP <- fit.iscmeb(
+  reslist_hvg_count$hV,
+  AdjList,
+  K=K_true,
+  beta_grid = seq(0, 5, by = 0.2),
+  maxIter_ICM = 6,
+  maxIter = 25, 
+  init.start=2,
+  epsLogLik = 1e-05,
+  verbose = TRUE)
+toc <- proc.time()
+time_iscmeb_profastP <- toc[3] - tic[3]
+save(reslist_iscmeb_profastP,time_iscmeb_profastP, file='reslist_iscmeb_profastP_DLPFC12.rds')
+table(unlist(reslist_iscmeb_profastP@idents))
+hy_profastP <- reslist_iscmeb_profastP@idents
+cluster_pf_profastP <- evaluate_clusterPF(hy_profastP, yList)
+apply(cluster_pf_profastP, 2, function(x) sd(x[1:12]))
+save(cluster_pf_profastP, hy_profastP, file='cluster_pf_profastP_DLPFC12.rds')
 
 
 # Removing unwanted variation in multi-section SRT data -------------------
@@ -256,7 +465,7 @@ save(dat_degs_pois, file='housekeep_noSpa_dat_degs_allgenescorrect_iscmeb_profas
 cutoff <- 0.001#0.05
 dim(subset(dat_degs_pois,   p_val_adj<cutoff & avg_log2FC>0.25))
 
-filename <- 'DLPFC12_DEGsList_iSCMEB_pois_orderedV2.xlsx'
+filename <- 'DLPFC12_DEGsList_iSCMEB_pois_orderedR1.xlsx'
 
 K_use <- length(unique(dat_degs_pois$cluster))
 for(k in 1:K_use){
