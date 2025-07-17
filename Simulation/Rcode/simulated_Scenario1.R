@@ -27,6 +27,7 @@ XList_sp <- lapply(seulist, function(x) Matrix::t(x[["RNA"]]@data))
 nvec <- sapply(seulist, ncol)
 
 
+
 library(FAST)
 hq <- 15
 

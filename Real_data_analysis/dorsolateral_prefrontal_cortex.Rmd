@@ -88,12 +88,15 @@ gene_hvg_2000 <- selectIntFeatures(seuList_filter,HVGList) #
 ## Get Log-nomalized data list
 
 ```{r  eval=TRUE}
-
 seulist_hvg <- lapply(seuList_filter, function(x) x[gene_hvg_2000, ])
+### Remove NA in annotataion
+seulist_hvg <- lapply(seulist_hvg, function(x){
+  idx <- which(!is.na(x$layer_guess_reordered))
+  x[,idx]
+})
 yList <- lapply(seulist_hvg, function(x) x$layer_guess_reordered)
 for(r in 1:length(yList)){
   y_true <- as.character(yList[[r]])
-  y_true[is.na(y_true)] <- "NA"
   yList[[r]] <- y_true 
 }
 posList <- list()

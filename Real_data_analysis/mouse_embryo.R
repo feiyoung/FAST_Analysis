@@ -1,6 +1,9 @@
 
 # Load data and preprocessing ---------------------------------------------
 
+
+
+
 library(PRECAST)
 library(Seurat)
 source("./util_funcs.R")
@@ -130,14 +133,8 @@ fit.iscmeb <- ProFAST:::fit.iscmeb
 
 sampleID <- get_sampleID(reslist$hV)
 library(harmony)
-### Choose number of clusters
-tic <- proc.time()
-hZ_harmony_profastG <- HarmonyMatrix(matlist2mat(reslist$hV), meta_data = data.frame(sample = sampleID),
-                                     vars_use = "sample", do_pca = F)
-toc <- proc.time()
-res_louvain_harmony_profastG <- drLouvain(hZ_harmony_profastG, resolution = 0.2)
-
-hK<- length(unique(res_louvain_harmony_profastG))
+## Set the  cluster number as 20
+hK<- 20
 tic <- proc.time()
 reslist_iscmeb_profastG <- fit.iscmeb(
   reslist$hV,

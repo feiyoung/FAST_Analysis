@@ -36,6 +36,8 @@ seulist_HK <- pbapply::pblapply(seuList, function(x) x[(housekeep_genes),])
 save(seulist_HK, file='seulist_HK_HCC4.rds')
 
 
+
+
 seulist_HK <- pbapply::pblapply(seulist_HK, DR.SC::FindSVGs, nfeatures = 2160)
 
 geneList_noSpa <- lapply(seulist_HK, function(x) {
@@ -112,32 +114,30 @@ save(reslist_hvg_count ,time_ProFAST_hvg_count, file="ProFAST_reslist_hvg_count1
 # Embedding alignment and spatial clustering ------------------------------
 ## output the function in ProFAST because fit.iscmeb() is now embeded in the R package but not exported.
 fit.iscmeb <- ProFAST:::fit.iscmeb
-
-
+### Use BIC in iSC-MEB to select the cluster number. nine clusters are identified
 tic <- proc.time()
-hZ_harmony_profastP <- HarmonyMatrix(matlist2mat(reslist_hvg_count$hV), meta_data = data.frame(sample = sampleID),
-                                     vars_use = "sample", do_pca = F)
-toc <- proc.time()
-toc <- proc.time()
-res_louvain_harmony_profastP_new <- drLouvain(hZ_harmony_profastP, resolution = 0.30)
-save(hZ_harmony_profastP, res_louvain_harmony_profastP_new, file='hamony_res_louvain_harmony_profastP_K9_HCC4.rds')
-
-load("ProFAST_reslist_hvg_count1_HCC4.rds")
+hK_count <- 4:12
 tic <- proc.time()
-reslist_iscmeb_pois_K9 <- fit.iscmeb(
+reslist_iscmeb_pois_cho <- fit.iscmeb(
   reslist_hvg_count$hV,
   AdjList,
-  K= 9,
+  K=hK_count,
   beta_grid = seq(0, 5, by = 0.2),
   maxIter_ICM = 6,
   maxIter = 30,
   init.start=1,
   seed = 1,
   epsLogLik = 1e-05,
-  coreNum = 1,
+  coreNum = 4,c_penalty=0.5, 
   verbose = TRUE)
 toc <- proc.time()
-time_iscmeb_pois_K9 <- toc[3] - tic[3]
+time_iscmeb_pois_cho <- toc[3] - tic[3]
+## The optimal number of clusters is 9.
+save(reslist_iscmeb_pois_cho,time_iscmeb_pois_cho, file='reslist_iscmeb_profastP_HCC4_2025.rds')
+lapply(reslist_iscmeb_pois_cho@idents, table) 
+
+### The results of reslist_iscmeb_pois_cho@idents is the same as the original reslist_iscmeb_pois_K9.
+reslist_iscmeb_pois_K9 <- reslist_iscmeb_pois_cho 
 lapply(reslist_iscmeb_pois_K9@idents, table)
 clusterList_iscmeb_pois_K9 <- reslist_iscmeb_pois_K9@idents
 save(reslist_iscmeb_pois_K9, file='reslist_iscmeb_pois_K9_HCC4.rds')

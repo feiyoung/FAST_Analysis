@@ -79,42 +79,39 @@ save(reslist_hvg_count, time_ProFAST_hvg_count, file ='reslist_ProFASTP_xeHBC2.r
 # Downstream analysis -----------------------------------------------------
 # Embedding alignment and spatial clustering ------------------------------
 ## output the function in ProFAST because fit.iscmeb() is now embeded in the R package but not exported.
-fit.iscmeb <- ProFAST:::fit.iscmeb
-
-sampleID <- get_sampleID(reslist$hV)
 library(harmony)
-### Choose number of clusters
-tic <- proc.time()
-hZ_harmony_profastP <- HarmonyMatrix(matlist2mat(reslist_hvg_count$hV), meta_data = data.frame(sample = sampleID),
-                                     vars_use = "sample", do_pca = F)
-toc <- proc.time()
-res_louvain_harmony_profastP <- drLouvain(hZ_harmony_profastP, resolution = 0.5)
 
-hK_pois <- length(unique(res_louvain_harmony_profastP))
+fit.iscmeb <- ProFAST:::fit.iscmeb
+hK_vec <- 8:20
+
+### Choose number of clusters
+
 tic <- proc.time()
 reslist_iscmeb_pois <- fit.iscmeb(
   reslist_hvg_count$hV,
   AdjList,
-  K=hK_pois,
+  K=hK_vec,
   beta_grid = seq(0, 5, by = 0.2),
   maxIter_ICM = 6,
   maxIter = 30,
   init.start=1,
   epsLogLik = 1e-05,
-  coreNum = 1,
+  coreNum = 4,
   verbose = TRUE)
 toc <- proc.time()
 time_iscmeb_pois <- toc[3] - tic[3]
-save(reslist_iscmeb_pois, time_iscmeb_pois, file='reslist_iscmeb_profastP_xeHBC2.rds')
+### determine the best q
+### old directory
+save(reslist_iscmeb_pois, time_iscmeb_pois, file='reslist_iscmeb_profastP_chooseq_8_20_xeHBC2.rds')
 hyList_iscmeb_pois <- reslist_iscmeb_pois@idents
-save(hyList_iscmeb_pois, file='hyList_iscmeb_profastP_xeHBC2.rds')
+save(hyList_iscmeb_pois, file='hyList_iscmeb_FASTP_xeHBC2V2.rds')
 
 # Re-order the cluster number
 
 ### Poisson versions:
-load('hyList_iscmeb_profastP_xeHBC2.rds')
-rawID <- c(2,4,9,7,10, 5,6,8,13,   1, 15, 12, 11, 3,14, 16, 17)
-names(rawID) <- 1:17
+load('hyList_iscmeb_FASTP_xeHBC2V2.rds')
+rawID <- c(2, 4, 7, 5, 6, 1, 8, 3, 9)
+names(rawID) <- 1:9
 hyList_iscmeb_pois_renumber <- lapply(hyList_iscmeb_pois, replace_ID, rawID=rawID)
 lapply(hyList_iscmeb_pois_renumber, table)
 save(hyList_iscmeb_pois_renumber, file='hyList_iscmeb_profastP_renumber_xeHBC2.rds')
